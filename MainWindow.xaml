@@ -1,0 +1,157 @@
+﻿<mah:MetroWindow x:Class="moasreport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Icon="moas_icon.ico"
+        Title="Northern Atlantia MoAS Report" Height="625" Width="800">
+    
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button DockPanel.Dock="Bottom" Content="Submit Report" Padding="10px" ToolTip="Validate data and submit report" Name="BtnSubmit" Click="BtnSubmit_Click" />
+            <Button DockPanel.Dock="Top" Content="Export Settings" Padding="10px" ToolTip="Exports static settings to json" Name="BtnExport" Click="btnExport_Click"/>
+            <Button Content="Import Settings" Padding="10px" ToolTip="Imports saved settings from json" Name="BtnImport" Click="btnImport_Click"/>
+        </DockPanel>
+        <TabControl DockPanel.Dock="Top">
+            <TabItem Header="General">
+                <DockPanel>
+                    <GroupBox Header="Group Info" Padding="5px" DockPanel.Dock="Top">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Group Name:" Padding="5px" Width="200" ToolTip="Group for which this report applies" />
+                                <ComboBox Name="CmbGroup" IsEditable="False" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Bottom">
+                                <Label Content="Year:" Padding="5px" Width="200" ToolTip="Reporting year for MoAS report" />
+                                <TextBox MaxLength="4" Name="ReportYear"></TextBox>
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Quarter:" Padding="5px" Width="200" ToolTip="Reporting quarter for MoAS report" />
+                                <ComboBox Name="CmbQuarter" IsEditable="False" />
+                            </DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Contact Info" Padding="5px">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Position:" Padding="5px" Width="200" ToolTip="Position within the group" />
+                                <ComboBox Name="CmbPosition" IsEditable="False" SelectionChanged="CmbPosition_SelectionChanged" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Bottom">
+                                <Label Content="Share Permission?" Padding="5px" ToolTip="Permission is required by Society policy to electronically publish certain information. What (if any) of your personal information do you give permission to be published on the Kingdom Regnum page or the MoAS Roster page?"></Label>
+                                <CheckBox Name="ModernNameShare" Padding="5px">Modern Name</CheckBox>
+                                <CheckBox Name="MailingShare" Padding="5px">Mailing Address</CheckBox>
+                                <CheckBox Name="PhoneShare" Padding="5px">Phone Number</CheckBox>
+                                <CheckBox Name="EmailShare" Padding="5px">E-mail Address</CheckBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="SCA Name:" Padding="5px" Width="200" ToolTip="SCA Name of submitter" />
+                                <TextBox Name="ScaName"></TextBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Modern Name:" Padding="5px" Width="200" ToolTip="Modern Name of submitter" />
+                                <TextBox Name="ModernName"></TextBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="E-mail Address:" Padding="5px" Width="200" ToolTip="E-mail to which a copy of this report will be sent and for the reporting entity" />
+                                <TextBox Name="EmailAddress"></TextBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Membership Number:" Padding="5px" Width="200" ToolTip="SCA Membership Number" />
+                                <TextBox Name="MembershipNumber" MaxLength="10"></TextBox>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Do you have a copy of your warrant?" Padding="5px" Width="210" ToolTip="SCA Membership Number" />
+                                <RadioButton Name="WarrantYes" Padding="5px">Yes</RadioButton>
+                                <RadioButton Name="WarrantNo" Padding="5px">No</RadioButton>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Membership Expiration:" Padding="5px" Width="200" ToolTip="E-mail to which a copy of this report will be sent and for the reporting entity" />
+                                <DatePicker Name="ExpirationDate" DisplayDate="2020-12-31" SelectedDateFormat="Long"></DatePicker>
+                            </DockPanel>
+                            <DockPanel></DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Other">
+                <DockPanel>
+                    <GroupBox Header="Seneschal Info" Padding="5px" DockPanel.Dock="Top">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Seneschal's SCA Name:" Padding="5px" Width="200" ToolTip="Group Seneschal's name" />
+                                <TextBox Name="SeneschalScaName" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Seneschal's Email:" Padding="5px" Width="200" ToolTip="Group Seneschal's email" />
+                                <TextBox Name="SeneschalEmail"></TextBox>
+                            </DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Contact and Deputy Information" Padding="5px" DockPanel.Dock="Top">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Do you need to update your contact information?" Padding="5px" Width="275" ToolTip="SCA Membership Number" />
+                                <RadioButton Name="UpdateYes" Padding="5px" Click="UpdateYes_Click">Yes</RadioButton>
+                                <RadioButton Name="UpdateNo" Padding="5px">No</RadioButton>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Do you have a deputy?" Padding="5px" Width="275" ToolTip="SCA Membership Number" />
+                                    <RadioButton Name="DeputyYes" Padding="5px" Click="DeputyYes_Click">Yes</RadioButton>
+                                    <RadioButton Name="DeputyNo" Padding="5px">No</RadioButton>
+                            </DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Going Forward">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Is there anyone in your local group that needs recognition?" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="If anyone in your group needs recognition, please indicate them here" />
+                                <TextBox Name="RecognitionText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Is there anything you need from the KMoAS to help with your role as MoAS?" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="Is there anything the KMoAS do to help out?" />
+                                <TextBox Name="NeedText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock Text="What are your group's goals for A&amp;S for the next reporting period?" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="If your group has any goals for the next reporting period, please indicate them here" />
+                                <TextBox Name="GoalsText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                            </DockPanel>
+                            <DockPanel></DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Activities">
+                <DockPanel>
+                    <GroupBox Header="Workshops and Classes" DockPanel.Dock="Top" ToolTip="Regularly scheduled A&amp;S nights fall under this category. Please include the date, topic &amp; attendance for each activity.">
+                        <DockPanel>
+                            <TextBlock Text="Workshops and classes that have occurred over the reporting period." TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="e.g. Sept 1 - Dance Practice - 8 in attendance - Hosted and taught by Lord Fancypants. INCLUDES A&amp;S NIGHTS" />
+                            <TextBox Name="ShopText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Miscellaneous A&amp;S" DockPanel.Dock="Bottom" ToolTip="This section is used to relay any information that isn't covered elsewhere." >
+                        <DockPanel>
+                            <TextBlock Text="Miscellaneous A&amp;S activities" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="e.g. Sept 1 - Dance Practice - 8 in attendance - Hosted and taught by Lord Fancypants. INCLUDES A&amp;S NIGHTS" />
+                            <TextBox Name="MiscText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Events" ToolTip="This section covers any events that were hosted by your group. Note: If an event is hosted by a Canton, the Barony doesn't need to report on it (and vice versa).">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Event A&amp;S:" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="e.g. Sept 30 - Ye Ole Baronial Birthday; We also had a bardic (with about 10 people participating) and dancing (about 15 people attending)." />
+                                <TextBox Name="EventText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Collegia or Universities" TextWrapping="WrapWithOverflow" Width="150" Padding="5px" ToolTip="e.g. We also had 3 classes (MoAS 101, Basic Scribal &amp; How to Make a T-Tunic) with about 5-8 people in each class." />
+                                <TextBox Name="UniText" SpellCheck.IsEnabled="True" Height="75" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
+                            </DockPanel>
+                            <DockPanel></DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>            
+        </TabControl>
+    </DockPanel>
+</mah:MetroWindow>

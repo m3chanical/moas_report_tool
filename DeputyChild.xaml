@@ -1,0 +1,36 @@
+﻿<mah:ChildWindow x:Class="moasreport.DeputyChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:moasreport"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/simplechildwindow"
+        mc:Ignorable="d"
+        ShowCloseButton="True"
+        Title="Deputy MoAS Information" Padding ="15" >
+
+    <DockPanel>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <DockPanel DockPanel.Dock="Bottom">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="okButton"  Margin="5" Content="Ok" Width="50" Click="okButton_Click" />
+                        <Button Name="cancelButton" Margin="5" Content="Cancel" Width="50" Click="cancelButton_Click" />
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Deputy SCA Name:" Padding="5px" Width="150" ToolTip="Deputy MoAS SCA name" />
+                    <TextBox Name="depSCA" Width="150"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Deputy Modern Name:" Padding="5px" Width="150" ToolTip="Deputy MoAS modern name" />
+                    <TextBox Name="depModern" Width="150"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Deputy E-mail:" Padding="5px" Width="150" ToolTip="Deputy MoAS email address" />
+                    <TextBox Name="depEmail" Width="150"/>
+                </DockPanel>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
+</mah:ChildWindow>
