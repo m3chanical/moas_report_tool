@@ -25,7 +25,7 @@
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Bottom">
                                 <Label Content="Year:" Padding="5px" Width="200" ToolTip="Reporting year for MoAS report" />
-                                <TextBox MaxLength="4" Name="ReportYear"></TextBox>
+                                <TextBox MaxLength="4" Name="ReportYear" PreviewTextInput="ReportYear_PreviewTextInput" TextChanged="ReportYear_TextChanged"></TextBox>
                             </DockPanel>
                             <DockPanel>
                                 <Label Content="Quarter:" Padding="5px" Width="200" ToolTip="Reporting quarter for MoAS report" />
@@ -60,7 +60,7 @@
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top">
                                 <Label Content="Membership Number:" Padding="5px" Width="200" ToolTip="SCA Membership Number" />
-                                <TextBox Name="MembershipNumber" MaxLength="10"></TextBox>
+                                <TextBox Name="MembershipNumber" MaxLength="10" PreviewTextInput="MembershipNumber_PreviewTextInput" TextChanged="MembershipNumber_TextChanged"></TextBox>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top">
                                 <Label Content="Do you have a copy of your warrant?" Padding="5px" Width="210" ToolTip="SCA Membership Number" />

@@ -8,8 +8,8 @@ namespace moasreport
 {
     class MoasSettings
     {
-        public int GroupName { get; set; }
-        public int Quarter { get; set; }
+        public int GroupName;
+        public int Quarter;
         public int Year { get; set; }
         public int Position { get; set; }
         public string ScaName { get; set; }

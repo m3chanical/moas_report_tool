@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -157,13 +158,13 @@ namespace moasreport
 
         private void ApplySettings() {
             #region General
-            CmbGroup.SelectedIndex = Enumerable.Range(0, _groupsStrings.Length).Contains(_moasSettingsImport.GroupName) ?  _moasSettingsImport.GroupName : 0;
+            CmbGroup.SelectedIndex = Enumerable.Range(0, _groupsStrings.Length).Contains(_moasSettingsImport.GroupName) ?  _moasSettingsImport.GroupName : 0; //
             CmbQuarter.SelectedIndex = Enumerable.Range(0, _quarterStrings.Length).Contains(_moasSettingsImport.Quarter) ? _moasSettingsImport.Quarter : ((DateTime.Now.Month + 2) / 3) - 1;
             ReportYear.Text = _moasSettingsImport.Year.ToString();
             CmbPosition.SelectedIndex = Enumerable.Range(0, _positionStrings.Length).Contains(_moasSettingsImport.Position) ? _moasSettingsImport.Position : 0;
-            ScaName.Text = string.IsNullOrEmpty(_moasSettingsImport.ScaName) ? "" : _moasSettingsImport.ScaName;
-            ModernName.Text = string.IsNullOrEmpty(_moasSettingsImport.ModernName) ?  "" : _moasSettingsImport.ModernName;
-            EmailAddress.Text = string.IsNullOrEmpty(_moasSettingsImport.EmailAddress) ? "" : _moasSettingsImport.EmailAddress;
+            ScaName.Text = (_moasSettingsImport?.ScaName) ?? "";
+            ModernName.Text = (_moasSettingsImport?.ModernName) ?? "";
+            EmailAddress.Text = (_moasSettingsImport?.EmailAddress) ?? "";
             MembershipNumber.Text = _moasSettingsImport.MembershipNumber.ToString();
             WarrantYes.IsChecked = _moasSettingsImport.WarrantCopy;
             ExpirationDate.SelectedDate = _moasSettingsImport.MembershipExpiration;
@@ -173,19 +174,19 @@ namespace moasreport
             EmailShare.IsChecked = _moasSettingsImport.SharePermission.FirstOrDefault(kvp => kvp.Key == EmailShare.Name).Value;
             #endregion
             #region Other
-            SeneschalScaName.Text =  string.IsNullOrEmpty(_moasSettingsImport.SeneschalScaName) ? "" : _moasSettingsImport.SeneschalScaName;
-            SeneschalEmail.Text = string.IsNullOrEmpty(_moasSettingsImport.SeneschalEmail) ? "" : _moasSettingsImport.SeneschalEmail;
+            SeneschalScaName.Text = (_moasSettingsImport?.SeneschalScaName) ?? "";
+            SeneschalEmail.Text = (_moasSettingsImport?.SeneschalEmail) ?? "";
             UpdateYes.IsChecked = _moasSettingsImport.UpdateContactInformation;
             DeputyYes.IsChecked = _moasSettingsImport.HaveDeputy;
-            RecognitionText.Text = string.IsNullOrEmpty(_moasSettingsImport.NeedRecognition) ? "" : _moasSettingsImport.NeedRecognition;
-            NeedText.Text = string.IsNullOrEmpty(_moasSettingsImport.NeedFromKingdom) ? "" : _moasSettingsImport.NeedFromKingdom;
-            GoalsText.Text = string.IsNullOrEmpty(_moasSettingsImport.GroupGoals) ? "" : _moasSettingsImport.GroupGoals;
+            RecognitionText.Text = (_moasSettingsImport?.NeedRecognition) ?? "";
+            NeedText.Text = (_moasSettingsImport?.NeedFromKingdom) ?? "";
+            GoalsText.Text = (_moasSettingsImport?.GroupGoals) ?? "";
             #endregion
-            #region Activities
-            ShopText.Text = string.IsNullOrEmpty(_moasSettingsImport.WorkshopsOccurred) ? "" : _moasSettingsImport.WorkshopsOccurred;
-            EventText.Text = string.IsNullOrEmpty(_moasSettingsImport.ASEvents) ? "" : _moasSettingsImport.ASEvents;
-            UniText.Text = string.IsNullOrEmpty(_moasSettingsImport.CollegiaEvents) ? "" : _moasSettingsImport.CollegiaEvents;
-            MiscText.Text = string.IsNullOrEmpty(_moasSettingsImport.MiscASActivities) ? "" : _moasSettingsImport.MiscASActivities;
+            #region Activities            
+            ShopText.Text = (_moasSettingsImport?.WorkshopsOccurred) ?? "";
+            EventText.Text = (_moasSettingsImport?.ASEvents) ?? "";
+            UniText.Text = (_moasSettingsImport?.CollegiaEvents) ?? "";
+            MiscText.Text = (_moasSettingsImport?.MiscASActivities) ?? "";
             #endregion
         }
 
@@ -224,11 +225,11 @@ namespace moasreport
             #region General
             _moasSettingsExport.GroupName = CmbGroup.SelectedIndex;
             _moasSettingsExport.Quarter = CmbQuarter.SelectedIndex;
-            _moasSettingsExport.Year = int.Parse(ReportYear.Text);
+            _moasSettingsExport.Year = int.Parse(ReportYear.Text); 
             _moasSettingsExport.Position = CmbPosition.SelectedIndex;
-            _moasSettingsExport.ScaName = ScaName.Text;
-            _moasSettingsExport.ModernName = ModernName.Text;
-            _moasSettingsExport.EmailAddress = EmailAddress.Text;
+            _moasSettingsExport.ScaName = ScaName?.Text ?? "";
+            _moasSettingsExport.ModernName = ModernName?.Text ?? "";
+            _moasSettingsExport.EmailAddress = EmailAddress?.Text ?? "";
             _moasSettingsExport.MembershipNumber = String.IsNullOrEmpty(MembershipNumber.Text) ? 0 : int.Parse(MembershipNumber.Text);
             _moasSettingsExport.WarrantCopy = (WarrantYes.IsChecked ?? false);
             _moasSettingsExport.MembershipExpiration = ExpirationDate.SelectedDate??DateTime.Now;
@@ -241,19 +242,19 @@ namespace moasreport
             _moasSettingsExport.SharePermission = share;
             #endregion
             #region Other
-            _moasSettingsExport.SeneschalScaName = SeneschalScaName.Text;
-            _moasSettingsExport.SeneschalEmail = SeneschalEmail.Text;
+            _moasSettingsExport.SeneschalScaName = SeneschalScaName?.Text ?? "";
+            _moasSettingsExport.SeneschalEmail = SeneschalEmail?.Text ?? "";
             _moasSettingsExport.UpdateContactInformation = UpdateYes.IsChecked ?? false;
             _moasSettingsExport.HaveDeputy = DeputyYes.IsChecked ?? false;
-            _moasSettingsExport.NeedRecognition = RecognitionText.Text;
-            _moasSettingsExport.NeedFromKingdom = NeedText.Text;
-            _moasSettingsExport.GroupGoals = GoalsText.Text;
+            _moasSettingsExport.NeedRecognition = RecognitionText?.Text ?? "";
+            _moasSettingsExport.NeedFromKingdom = NeedText?.Text ?? "";
+            _moasSettingsExport.GroupGoals = GoalsText?.Text ?? "";
             #endregion
             #region Activities
-            _moasSettingsExport.WorkshopsOccurred = ShopText.Text;
-            _moasSettingsExport.ASEvents = EventText.Text;
-            _moasSettingsExport.CollegiaEvents = UniText.Text;
-            _moasSettingsExport.MiscASActivities = MiscText.Text;
+            _moasSettingsExport.WorkshopsOccurred = ShopText?.Text ?? "";
+            _moasSettingsExport.ASEvents = EventText?.Text ?? "";
+            _moasSettingsExport.CollegiaEvents = UniText?.Text ?? "";
+            _moasSettingsExport.MiscASActivities = MiscText?.Text ?? "";
             #endregion
         }
 
@@ -421,6 +422,24 @@ namespace moasreport
                 };
                 await this.ShowChildWindowAsync(baronialMoASChildWindow);
             }
+        }
+
+        private void ReportYear_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void MembershipNumber_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void ReportYear_TextChanged(object sender, TextChangedEventArgs e) {
+            ReportYear.Text = ReportYear.Text.Replace(" ", string.Empty);
+        }
+
+        private void MembershipNumber_TextChanged(object sender, TextChangedEventArgs e) {
+            MembershipNumber.Text = MembershipNumber.Text.Replace(" ", string.Empty);
         }
     }
 }
