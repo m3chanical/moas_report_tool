@@ -10,25 +10,25 @@ namespace moasreport
     {
         public int GroupName;
         public int Quarter;
-        public int Year { get; set; }
-        public int Position { get; set; }
-        public string ScaName { get; set; }
-        public string ModernName { get; set; }
-        public string EmailAddress { get; set; }
-        public int MembershipNumber { get; set; }
-        public bool WarrantCopy { get; set; }
-        public DateTime MembershipExpiration { get; set; }
-        public List<KeyValuePair<string, bool>> SharePermission { get; set; }
-        public string SeneschalScaName { get; set; }
-        public string SeneschalEmail { get; set; }
-        public bool UpdateContactInformation { get; set; }
-        public bool HaveDeputy { get; set; }
-        public string NeedRecognition { get; set; }
-        public string NeedFromKingdom { get; set; }
-        public string GroupGoals { get; set; }
-        public string WorkshopsOccurred { get; set; }
-        public string ASEvents { get; set; }
-        public string CollegiaEvents { get; set; }
-        public string MiscASActivities { get; set; }
+        public int Year;
+        public int Position;
+        public string ScaName;
+        public string ModernName;
+        public string EmailAddress;
+        public int MembershipNumber;
+        public bool WarrantCopy;
+        public DateTime MembershipExpiration;
+        public List<KeyValuePair<string, bool>> SharePermission;
+        public string SeneschalScaName;
+        public string SeneschalEmail;
+        public bool UpdateContactInformation;
+        public bool HaveDeputy;
+        public string NeedRecognition;
+        public string NeedFromKingdom;
+        public string GroupGoals;
+        public string WorkshopsOccurred;
+        public string ASEvents;
+        public string CollegiaEvents;
+        public string MiscASActivities;
     }
 }
